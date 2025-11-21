@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="slot_card_size">120dp</dimen>
+    <dimen name="slot_card_margin">8dp</dimen>
+    <dimen name="slot_card_radius">12dp</dimen>
+    <dimen name="slot_card_inner_padding">12dp</dimen>
+
+    <dimen name="grid_spacing">12dp</dimen>
+
+</resources>

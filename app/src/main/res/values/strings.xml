@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ParkEase</string>
+    <string name="qr_code">QR code for booking</string>
+
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Selected state -->
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/slot_selected_bg"/>
+            <corners android:radius="@dimen/slot_card_radius"/>
+        </shape>
+    </item>
+
+    <!-- Disabled / booked -->
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/slot_booked_bg"/>
+            <corners android:radius="@dimen/slot_card_radius"/>
+        </shape>
+    </item>
+
+    <!-- Pressed state -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/slot_pressed_bg"/>
+            <corners android:radius="@dimen/slot_card_radius"/>
+        </shape>
+    </item>
+
+    <!-- Default -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/white"/>
+            <corners android:radius="@dimen/slot_card_radius"/>
+        </shape>
+    </item>
+</selector>
