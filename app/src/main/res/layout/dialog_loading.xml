@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingHorizontal="48dp"
+    android:paddingVertical="32dp"
+    android:background="@drawable/bg_loading_dialog"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:indicatorColor="@color/brand_main"
+        app:trackColor="#F1F5F9"
+        app:trackCornerRadius="4dp"
+        app:indicatorSize="48dp"
+        app:trackThickness="4dp" />
+
+    <TextView
+        android:id="@+id/tv_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Processing..."
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_header"
+        android:letterSpacing="0.02"
+        android:fontFamily="sans-serif-medium"/>
+
+    <TextView
+        android:id="@+id/tv_please_wait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Please wait a moment"
+        android:textSize="12sp"
+        android:textColor="#64748B" />
+
+</LinearLayout>

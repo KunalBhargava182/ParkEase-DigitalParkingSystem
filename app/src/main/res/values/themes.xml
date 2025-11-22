@@ -1,9 +1,21 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.ParkEase" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-    </style>
+
 
     <style name="Theme.ParkEase" parent="Base.Theme.ParkEase" />
+
+    <style name="Base.Theme.ParkEase" parent="Theme.Material3.DayNight.NoActionBar">
+
+    <item name="colorPrimary">@color/brand_main</item>
+            <item name="colorOnPrimary">@color/white</item>
+            <item name="colorPrimaryContainer">@color/brand_dark</item>
+            <item name="colorOnPrimaryContainer">@color/white</item>
+
+            <item name="android:windowBackground">@color/page_bg_light</item>
+            <item name="colorSurface">@color/surface_light</item>
+            <item name="colorOnSurface">@color/text_primary_light</item>
+
+            <item name="android:statusBarColor">@color/page_bg_light</item>
+            <item name="android:windowLightStatusBar">true</item> </style>
+
 </resources>

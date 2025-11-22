@@ -1,7 +1,10 @@
 package com.parkease.app.ui.details
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -47,33 +50,27 @@ class AreaDetailsActivity : AppCompatActivity() {
         parkingName = intent.getStringExtra("parking_name") ?: "Parking Area"
         tvParkingName.text = parkingName
 
-        // Clean base prices
         val basePrices = listOf(20, 30, 40, 50, 60)
 
         // Initialize slots
         if (savedInstanceState == null) {
-
             for (i in 1..10) {
                 val available = (i % 3 != 0)
                 val base = basePrices[(i - 1) % basePrices.size]
                 slots.add(ParkingSlot(i, available, base))
             }
-
         } else {
-
             selectedIndex = savedInstanceState.getInt(KEY_SELECTED_INDEX, -1)
 
             for (i in 1..10) {
                 val available = (i % 3 != 0)
                 val base = basePrices[(i - 1) % basePrices.size]
-
                 val slot = ParkingSlot(i, available, base)
 
                 if (i - 1 == selectedIndex && slot.isAvailable) {
                     slot.isSelected = true
                     selectedSlot = slot
                 }
-
                 slots.add(slot)
             }
         }
@@ -86,12 +83,11 @@ class AreaDetailsActivity : AppCompatActivity() {
             if (index == -1) return@SlotAdapter
 
             if (!slotClicked.isAvailable) {
-                Toast.makeText(this, "Slot ${slotClicked.id} is already booked", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(this, "Slot ${slotClicked.id} is already booked", Toast.LENGTH_SHORT).show()
                 return@SlotAdapter
             }
 
-            // Remove old selection
+            // Remove previous selection
             if (selectedIndex != -1 && selectedIndex < slots.size) {
                 slots[selectedIndex].isSelected = false
                 adapter.notifyItemChanged(selectedIndex)
@@ -106,24 +102,12 @@ class AreaDetailsActivity : AppCompatActivity() {
             btnBook.isEnabled = true
         }
 
-        // Beautiful 2-column grid
         recyclerView.layoutManager = GridLayoutManager(this, 2)
         recyclerView.adapter = adapter
 
         btnBook.setOnClickListener {
             selectedSlot?.let { slot ->
-
-                // Compute final dynamic price
-                val (finalPrice, _) = PricingUtil.computePrice(slot.basePrice.toDouble())
-
-                val intent = Intent(this, BookingConfirmationActivity::class.java).apply {
-                    putExtra("slot_number", slot.id)
-                    putExtra("parking_name", parkingName)
-                    putExtra("price", finalPrice) // pass clean integer
-                }
-
-                startActivity(intent)
-                finish()
+                showLoadingAndProceed(slot)
             }
         }
     }
@@ -131,5 +115,32 @@ class AreaDetailsActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(KEY_SELECTED_INDEX, selectedIndex)
+    }
+
+    // -----------------------
+    // Loading Screen Function
+    // -----------------------
+    private fun showLoadingAndProceed(slot: ParkingSlot) {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_loading)
+        dialog.setCancelable(false)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.show()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+
+            val (finalPrice, _) = PricingUtil.computePrice(slot.basePrice.toDouble())
+
+            val intent = Intent(this, BookingConfirmationActivity::class.java).apply {
+                putExtra("slot_number", slot.id)
+                putExtra("parking_name", parkingName)
+                putExtra("price", finalPrice)
+            }
+
+            dialog.dismiss()
+            startActivity(intent)
+            finish()
+
+        }, 2000) // 2-second loading screen
     }
 }

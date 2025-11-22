@@ -11,9 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
-import com.parkease.app.MainActivity
 import com.parkease.app.R
-import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,14 +28,14 @@ class BookingConfirmationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking_confirmation)
 
-        // Read intent extras
+        // 1. Read intent extras
         val parkingName = intent.getStringExtra("parking_name") ?: "Unknown Parking"
         val slotNumber = intent.getIntExtra("slot_number", -1)
-        val price = intent.getIntExtra("price", -1)  // NOW using Int not Double
+        val price = intent.getIntExtra("price", -1)
         val reference = intent.getStringExtra("reference") ?: generateReference()
         val bookingTime = intent.getStringExtra("booking_time") ?: currentTimestamp()
 
-        // find views
+        // 2. Find views
         tvTitle = findViewById(R.id.tv_title)
         tvMessage = findViewById(R.id.tv_message)
         tvInfo = findViewById(R.id.tv_info)
@@ -45,29 +43,29 @@ class BookingConfirmationActivity : AppCompatActivity() {
         btnOk = findViewById(R.id.btn_ok)
         btnViewDetails = findViewById(R.id.btn_view_details)
 
-        // Main title
+        // 3. Set UI Text
         tvTitle.text = "Booking Confirmed!"
-
-        // Slot + parking name
         tvMessage.text = "You have selected Slot $slotNumber in $parkingName."
 
-        // Clean price text
+        // Format price text cleanly
         val priceText = if (price > 0) "• ₹$price" else ""
-
-        // Visible info text
         tvInfo.text = "Reference: $reference • $bookingTime $priceText"
 
-        // QR JSON content
-        val qrContent = JSONObject().apply {
-            put("parking", parkingName)
-            put("slot", slotNumber)
-            put("price", "₹$price")      // CLEAN PRICE IN QR
-            put("reference", reference)
-            put("time", bookingTime)
-            put("app", "ParkEase")
-        }.toString()
+        // 4. Generate QR Content (Plain Text, NOT JSON)
+        // This ensures the scanner shows readable text immediately
+        val qrContent = """
+            🅿️ PARKING TICKET
+            ------------------
+            Ref ID  : $reference
+            Location: $parkingName
+            Slot No : $slotNumber
+            Amount  : ₹$price
+            Date    : $bookingTime
+            ------------------
+            Verifiable via ParkEase
+        """.trimIndent()
 
-        // Show QR
+        // 5. Generate and Show QR Bitmap
         val qrBitmap = generateQrBitmap(qrContent, 512)
         if (qrBitmap != null) {
             imgQr.visibility = View.VISIBLE
@@ -76,9 +74,8 @@ class BookingConfirmationActivity : AppCompatActivity() {
             imgQr.visibility = View.GONE
         }
 
-        // OK button
+        // 6. OK Button -> Go to Invoice/Payment
         btnOk.setOnClickListener {
-
             val intent = Intent(this, InvoiceActivity::class.java).apply {
                 putExtra("parking", parkingName)
                 putExtra("slot", slotNumber)
@@ -86,22 +83,33 @@ class BookingConfirmationActivity : AppCompatActivity() {
                 putExtra("reference", reference)
                 putExtra("time", bookingTime)
             }
-
             startActivity(intent)
             finish()
         }
 
-
-
-        // Share booking details
+        // 7. Share Button -> Send nice text message
         btnViewDetails.setOnClickListener {
+            val shareMessage = """
+                   ParkEase Booking Confirmed!
+                
+                   Location: $parkingName
+                   Slot: $slotNumber
+                   Price: ₹$price
+                   Reference: $reference
+                   Time: $bookingTime
+                
+                Please show this at the entry.
+            """.trimIndent()
+
             val share = Intent(Intent.ACTION_SEND)
             share.type = "text/plain"
-            share.putExtra(Intent.EXTRA_SUBJECT, "Booking $reference")
-            share.putExtra(Intent.EXTRA_TEXT, qrContent)
-            startActivity(Intent.createChooser(share, "Share booking"))
+            share.putExtra(Intent.EXTRA_SUBJECT, "ParkEase Booking: $reference")
+            share.putExtra(Intent.EXTRA_TEXT, shareMessage)
+            startActivity(Intent.createChooser(share, "Share Booking Details"))
         }
     }
+
+    // --- Helper Functions ---
 
     private fun generateQrBitmap(content: String, size: Int): Bitmap? {
         return try {

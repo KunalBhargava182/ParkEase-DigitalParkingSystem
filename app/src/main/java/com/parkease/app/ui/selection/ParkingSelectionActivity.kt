@@ -1,7 +1,10 @@
 package com.parkease.app.ui.selection
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -49,10 +52,30 @@ class ParkingSelectionActivity : AppCompatActivity() {
             ParkingArea("Tech Park Visitor Parking", "Small tech park near Jayanagar (visitor slots)", "3.2 km away")
         )
 
+        // UPDATED ADAPTER LOGIC
         adapter = ParkingAdapter(parkingAreas) { selectedArea ->
-            val intent = Intent(this, AreaDetailsActivity::class.java)
-            intent.putExtra("parking_name", selectedArea.name)
-            startActivity(intent)
+
+            // 1. Show Loading Dialog
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.dialog_loading) // Use your specific XML layout
+            dialog.setCancelable(false) // Prevent clicking outside
+
+            // Important: Set background transparent so rounded corners show correctly
+            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+            dialog.show()
+
+            // 2. Delay for 2 Seconds (2000ms)
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                dialog.dismiss() // Close loading screen
+
+                // 3. Navigate to Details Activity
+                val intent = Intent(this, AreaDetailsActivity::class.java)
+                intent.putExtra("parking_name", selectedArea.name)
+                startActivity(intent)
+
+            }, 500)
         }
 
         recyclerView.adapter = adapter

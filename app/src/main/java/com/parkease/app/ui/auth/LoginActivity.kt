@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
         val etEmail = findViewById<EditText>(R.id.et_email)
         val etPassword = findViewById<EditText>(R.id.et_password)
         val btnLogin = findViewById<Button>(R.id.btn_login)
-        val tvSignup = findViewById<TextView>(R.id.tv_go_signup)
+        val tvSignup = findViewById<TextView>(R.id.tv_signup)
 
         btnLogin.setOnClickListener {
             // Dummy auth: accept anything

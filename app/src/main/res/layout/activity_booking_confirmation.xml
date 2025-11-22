@@ -5,121 +5,118 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient"
-    android:padding="24dp"
+    android:background="#F3F4F6"
+    android:padding="16dp"
     tools:context=".ui.booking.BookingConfirmationActivity">
 
-    <!-- Card container -->
     <androidx.cardview.widget.CardView
         android:id="@+id/card_container"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:padding="24dp"
-        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="24dp"
         app:cardElevation="8dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp">
 
-            <!-- Circular icon background -->
             <FrameLayout
                 android:id="@+id/icon_frame"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/ic_circle_bg"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/ic_success"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/img_success"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_success" />
             </FrameLayout>
 
-            <!-- Title -->
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:text="Booking Confirmed!"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="#0AD70A"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/icon_frame" />
 
-            <!-- Sub title / small description -->
             <TextView
                 android:id="@+id/tv_subtitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:text="Thanks — your slot is reserved."
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:text="Your parking slot has been successfully reserved."
+                android:textColor="#6B7280"
+                android:textSize="14sp"
+                android:paddingHorizontal="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
-            <!-- Message (slot & location) -->
             <TextView
                 android:id="@+id/tv_message"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:lineSpacingExtra="2dp"
                 android:text="You have selected Slot 3 in XYZ Parking Space."
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#2563EB"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:paddingHorizontal="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_subtitle" />
 
-            <!-- Small info row (time / reference / price) -->
             <TextView
                 android:id="@+id/tv_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="24dp"
+                android:background="#F3F4F6"
                 android:gravity="center"
-                android:text="Reference: #BKG-2048 • 3rd Aug, 2025 • 2:30 PM • ₹120"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:padding="12dp"
+                android:text="Reference: #BKG-2048\n3rd Aug, 2025 • 2:30 PM\nPrice: ₹120"
+                android:textColor="#374151"
+                android:textSize="13sp"
+                android:lineSpacingExtra="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_message" />
 
-            <!-- QR Image (hidden if no data) -->
             <ImageView
                 android:id="@+id/img_qr"
-                android:layout_width="160dp"
-                android:layout_height="160dp"
-                android:layout_marginTop="16dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="12dp"
                 android:contentDescription="@string/qr_code"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_info" />
 
-            <!-- Buttons container -->
             <LinearLayout
                 android:id="@+id/btn_row"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical"
+                android:paddingHorizontal="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -129,29 +126,31 @@
                     android:id="@+id/btn_ok"
                     style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginHorizontal="32dp"
-                    android:layout_marginBottom="12dp"
-                    android:backgroundTint="@color/black"
-                    android:text="OK"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="@color/brand_main"
+                    android:text="Proceed To Pay"
                     android:textAllCaps="false"
                     android:textSize="16sp"
-                    app:cornerRadius="12dp"
+                    android:textStyle="bold"
+                    app:cornerRadius="25dp"
                     app:iconGravity="textStart"
-
-                    app:iconPadding="8dp" />
+                    app:iconPadding="8dp"
+                    app:iconTint="#FFFFFF" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_view_details"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginHorizontal="32dp"
-                    android:text="View Details"
+                    android:layout_height="50dp"
+                    android:text="Share Details"
                     android:textAllCaps="false"
-                    android:textSize="14sp"
-
-                    app:cornerRadius="12dp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/brand_main"
+                    app:strokeColor="@color/brand_main"
+                    app:strokeWidth="2dp"
+                    app:cornerRadius="25dp" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

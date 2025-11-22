@@ -1,7 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.ParkEase" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-    </style>
+
+        <item name="colorPrimary">@color/brand_main_dark</item>
+        <item name="colorOnPrimary">@color/page_bg_dark</item>
+        <item name="colorPrimaryContainer">@color/brand_main</item>
+
+        <item name="android:windowBackground">@color/page_bg_dark</item>
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnSurface">@color/text_primary_dark</item>
+
+        <item name="android:statusBarColor">@color/page_bg_dark</item>
+        <item name="android:windowLightStatusBar">false</item> </style>
+
+    <style name="Theme.ParkEase" parent="Base.Theme.ParkEase" />
 </resources>

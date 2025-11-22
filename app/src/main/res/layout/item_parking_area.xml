@@ -8,41 +8,55 @@
     android:layout_marginBottom="12dp"
     android:layout_marginHorizontal="4dp"
     app:cardCornerRadius="16dp"
-    app:cardElevation="6dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@android:color/white"
     android:foreground="?attr/selectableItemBackground">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
             android:id="@+id/tv_parking_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Sample Parking"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/black"/>
-
-        <TextView
-            android:id="@+id/tv_parking_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Address goes here"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="4dp"/>
+            android:textColor="@color/text_header"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_parking_distance"/>
 
         <TextView
             android:id="@+id/tv_parking_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1.5 km away"
-            android:textSize="13sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="4dp"/>
+            android:text="1.5 km"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/brand_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_parking_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_parking_name"/>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_parking_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="123 Main St, Near Central Park"
+            android:textSize="14sp"
+            android:textColor="@color/text_body"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintStart_toStartOf="@id/tv_parking_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_parking_name"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

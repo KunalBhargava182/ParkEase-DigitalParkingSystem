@@ -39,5 +39,32 @@
     <!-- booked tint -->
 
 
+    <color name="brand_primary">#1E3A8A</color>
+    <color name="brand_primary_dark">#172554</color>
+
+    <color name="background_color">#F8FAFC</color>
+    <color name="surface_color">#FFFFFF</color>
+    <color name="text_primary">#1E293B</color>
+    <color name="text_secondary">#64748B</color>
+    <color name="input_outline">#CBD5E1</color>
+
+    <color name="brand_main">#2563EB</color>
+    <color name="brand_dark">#1E40AF</color>
+    <color name="page_bg">#F1F5F9</color>
+    <color name="input_bg">#F8FAFC</color>
+    <color name="text_header">#0F172A</color>
+    <color name="text_body">#64748B</color>
+
+
+    <color name="page_bg_light">#F1F5F9</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="text_primary_light">#0F172A</color>
+
+    <color name="brand_main_dark">#60A5FA</color>
+    <color name="page_bg_dark">#0F172A</color>
+    <color name="surface_dark">#1E293B</color>
+    <color name="text_primary_dark">#F8FAFC</color>
+
+
 
 </resources>
